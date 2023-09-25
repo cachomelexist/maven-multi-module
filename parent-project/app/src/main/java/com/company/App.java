@@ -13,9 +13,10 @@ public class App {
 	private CustomTableService tableService;
 
 	public void start(String[] sourceFile) {
+		tableService = new CustomTableServiceImpl();
 		if(sourceFile.length == 0) {
 			try {
-				tableService = new CustomTableServiceImpl();
+				tableService.createTable();
 			}
 			catch(IOException e) {
 				e.printStackTrace();
@@ -25,7 +26,7 @@ public class App {
 			String fileName = sourceFile[0];
 			while(tableService.getRowCount() == 0) {
 				try {
-					tableService = new CustomTableServiceImpl(fileName);
+					tableService.createTable(fileName);
 				}
 				catch(IOException e) {
 					System.out.println("Table Empty. Try Again.");
@@ -33,6 +34,12 @@ public class App {
 					fileName = scan.nextLine();
 				}
 			}
+		}
+		try {
+			tableService.saveTable();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
 		}
 		tableService.printTable();
 		
@@ -88,9 +95,13 @@ public class App {
 		System.out.println("Table Dimensions: (R:" + inputRows + ", C:" + inputCols + ")");
 		
 		try {
-			tableService = new CustomTableServiceImpl(inputRows, inputCols);
+			tableService.createTable(inputRows, inputCols);
+			tableService.saveTable();
 		}
 		catch(IOException e) {
+			e.printStackTrace();
+		}
+		catch(IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 	}

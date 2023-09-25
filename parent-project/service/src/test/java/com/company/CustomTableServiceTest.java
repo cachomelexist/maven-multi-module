@@ -1,25 +1,44 @@
 package com.company;
 
+
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.io.IOException;
 import java.lang.IndexOutOfBoundsException;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Assertions;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 public class CustomTableServiceTest {
-	private String keySearch, keyResult;
-	private Integer order;
-	private CustomTableServiceImpl tableService;
+	private String search, result;
+	private CustomTableService tableService;
+	private Map<String, String> keyValue = new HashMap<String, String>() {{
+				put("asd123", "321dsa");
+				put("d3?", "X&)");
+				put("lq2=", ":{R\"");
+				put("UrlF,D", "+TWCRe");
+				put("g\"3I@", "h>Vxv");
+				put("qwe456", "654ewq");
+			}};
+	private List<ArrayList<String>> tableCoords;
 	
 	@BeforeEach
-	public void setup() {
-		Assertions.assertDoesNotThrow(() -> {
-			tableService = new CustomTableServiceImpl();
-		});
+	public void customTableMocking() {
+		/*CustomTable sampleTable = mock(CustomTable.class);
+		when(sampleTable.getMap()).thenReturn(keyValue);
+		when(sampleTable.getCoords()).thenReturn(tableCoords);*/
+		
+		tableCoords = new ArrayList<ArrayList<String>>();
+		tableService = spy(new CustomTableServiceImpl());
 	}
 	
 	/*******************************************************************************
@@ -31,88 +50,140 @@ public class CustomTableServiceTest {
     @Test
 	@DisplayName("Should return 0 since search have no match")
     public void searchKeyInstancesShouldReturnZero() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("lq2=");
 		Assertions.assertEquals(0, keyInstanceList.size());
     }
 	
     @Test
     public void searchKeyInstancesSingleCharStart() {
-		keySearch = "@";
-		keyResult = "@J0gK\"";
-		order = 0;
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(keySearch);
-		Assertions.assertEquals(keyResult, keyInstanceList.get(order).get(0));
+		search = "U";
+		result = "UrlF,D";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
 	}
 	
     @Test
     public void searchKeyInstancesSingleCharMiddle() {
-		keySearch = "7";
-		keyResult = "B77RNX";
-		order = 0;
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(keySearch);
-		Assertions.assertEquals(keyResult, keyInstanceList.get(order).get(0));
+		search = "1";
+		result = "asd123";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
 	}
 	
     @Test
     public void searchKeyInstancesSingleCharEnd() {
-		keySearch = "\\";
-		keyResult = "\\G\\";
-		order = 0;
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(keySearch);
-		Assertions.assertEquals(keyResult, keyInstanceList.get(order).get(0));
+		search = "D";
+		result = "UrlF,D";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
 	}
 	
     @Test
     public void searchKeyInstancesSingleCharMultiKeys() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("F");
+		tableCoords = new ArrayList<ArrayList<String>>();
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals(3, keyInstanceList.size());
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("3");
+		Assertions.assertEquals(2, keyInstanceList.size());
 	}
 	
     @Test
     public void searchKeyInstancesTwoCharStart() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("z5");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("z5\\oI", keyInstanceList.get(0).get(0));
+		search = "Ur";
+		result = "UrlF,D";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchKeyInstancesTwoCharMiddle() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("rQ");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("HrQ[", keyInstanceList.get(0).get(0));
+		search = "q2";
+		result = "lq2=";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchKeyInstancesTwoCharEnd() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("/O");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("&0h{/O", keyInstanceList.get(0).get(0));
+		search = "I@";
+		result = "g\"3I@";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchKeyInstancesMultiCharStart() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("FyZu");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("FyZu:$", keyInstanceList.get(0).get(0));
+		search = "asd12";
+		result = "asd123";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchKeyInstancesMultiCharMiddle() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("0h{/");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("&0h{/O", keyInstanceList.get(0).get(0));
+		search = "we45";
+		result = "qwe456";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchKeyInstancesMultiCharEnd() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances("rlF,D");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("UrlF,D", keyInstanceList.get(0).get(0));
+		search = "q2=";
+		result = "lq2=";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchKeyInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
 	/*******************************************************************************
@@ -123,79 +194,141 @@ public class CustomTableServiceTest {
 	
     @Test
     public void searchValueInstancesNoMatch() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("qwe456");
 		Assertions.assertEquals(0, keyInstanceList.size());
     }
 	
     @Test
     public void searchValueInstancesSingleCharStart() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("R");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("@iC3&4", keyInstanceList.get(2).get(0));
+		search = ":";
+		result = "lq2=";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
 	}
 	
     @Test
     public void searchValueInstancesSingleCharMiddle() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("F");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("2]4hi{", keyInstanceList.get(0).get(0));
+		search = "V";
+		result = "g\"3I@";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
 	}
 	
     @Test
     public void searchValueInstancesSingleCharEnd() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("j");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("HrQ[", keyInstanceList.get(0).get(0));
+		search = "a";
+		result = "asd123";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
 	}
 	
     @Test
     public void searchValueInstancesSingleCharMultiKeys() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("F");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
+		search = "e";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
 		Assertions.assertEquals(2, keyInstanceList.size());
 	}
 	
     @Test
     public void searchValueInstancesTwoCharStart() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("_{");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("FyZu:$", keyInstanceList.get(0).get(0));
+		search = "X&";
+		result = "d3?";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchValueInstancesTwoCharMiddle() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("k9");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("L-b;3", keyInstanceList.get(0).get(0));
+		search = "WC";
+		result = "UrlF,D";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchValueInstancesTwoCharEnd() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("Gp");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("nFB,/", keyInstanceList.get(0).get(0));
+		search = "R\"";
+		result = "lq2=";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchValueInstancesMultiCharStart() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("FftBi");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("&0h{/O", keyInstanceList.get(0).get(0));
+		search = "+TWCR";
+		result = "UrlF,D";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchValueInstancesMultiCharMiddle() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("TWCR");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("UrlF,D", keyInstanceList.get(0).get(0));
+		search = "21ds";
+		result = "asd123";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
     @Test
     public void searchValueInstancesMultiCharEnd() {
-		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances("H7W}Q");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("B77RNX", keyInstanceList.get(0).get(0));
+		search = ">Vxv";
+		result = "g\"3I@";
+		
+		List<ArrayList<String>> keyInstanceList = tableService.searchValueInstances(search);		
+		Assertions.assertEquals(result, keyInstanceList.get(0).get(0));
     }
 	
 	/*******************************************************************************
@@ -206,29 +339,38 @@ public class CustomTableServiceTest {
 	
     @Test
     public void getDataByKeyFirst() {
-		List<String> searchData = tableService.getDataByKey("d3?");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
+		List<String> searchData = tableService.getDataByKey("asd123");
 		Assertions.assertEquals("0,0", searchData.get(0));
-		Assertions.assertEquals("d3?", searchData.get(1));
-		Assertions.assertEquals("X&)", searchData.get(2));
+		Assertions.assertEquals("asd123", searchData.get(1));
+		Assertions.assertEquals("321dsa", searchData.get(2));
     }
 	
     @Test
     public void getDataByKeyMiddle() {
-		List<String> searchData = tableService.getDataByKey("q,ZpI]");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("1,2", searchData.get(0));
-		Assertions.assertEquals("q,ZpI]", searchData.get(1));
-		Assertions.assertEquals("uyESws", searchData.get(2));
+		List<String> searchData = tableService.getDataByKey("g\"3I@");		
+		Assertions.assertEquals("0,1", searchData.get(0));
+		Assertions.assertEquals("g\"3I@", searchData.get(1));
+		Assertions.assertEquals("h>Vxv", searchData.get(2));
     }
 	
     @Test
     public void getDataByKeyLast() {
-		List<String> searchData = tableService.getDataByKey("nFB,/");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("4,4", searchData.get(0));
-		Assertions.assertEquals("nFB,/", searchData.get(1));
-		Assertions.assertEquals("U;0Gp", searchData.get(2));
+		List<String> searchData = tableService.getDataByKey("lq2=");		
+		Assertions.assertEquals("0,2", searchData.get(0));
+		Assertions.assertEquals("lq2=", searchData.get(1));
+		Assertions.assertEquals(":{R\"", searchData.get(2));
     }
 	
 	/*******************************************************************************
@@ -239,29 +381,38 @@ public class CustomTableServiceTest {
 	
     @Test
     public void getDataByCoordFirst() {
-		List<String> searchData = tableService.getDataByCoord(0,0);
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
+		List<String> searchData = tableService.getDataByCoord(0,0);		
 		Assertions.assertEquals("0,0", searchData.get(0));
+		Assertions.assertEquals("UrlF,D", searchData.get(1));
+		Assertions.assertEquals("+TWCRe", searchData.get(2));
+    }
+	
+    @Test
+    public void getDataByCoordMiddle() {
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
+		List<String> searchData = tableService.getDataByCoord(0,1);		
+		Assertions.assertEquals("0,1", searchData.get(0));
 		Assertions.assertEquals("d3?", searchData.get(1));
 		Assertions.assertEquals("X&)", searchData.get(2));
     }
 	
     @Test
-    public void getDataByCoordMiddle() {
-		List<String> searchData = tableService.getDataByCoord(1,2);
-		
-		Assertions.assertEquals("1,2", searchData.get(0));
-		Assertions.assertEquals("q,ZpI]", searchData.get(1));
-		Assertions.assertEquals("uyESws", searchData.get(2));
-    }
-	
-    @Test
     public void getDataByCoordLast() {
-		List<String> searchData = tableService.getDataByCoord(4,4);
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals("4,4", searchData.get(0));
-		Assertions.assertEquals("nFB,/", searchData.get(1));
-		Assertions.assertEquals("U;0Gp", searchData.get(2));
+		List<String> searchData = tableService.getDataByCoord(0,2);		
+		Assertions.assertEquals("0,2", searchData.get(0));
+		Assertions.assertEquals("qwe456", searchData.get(1));
+		Assertions.assertEquals("654ewq", searchData.get(2));
     }
 	
 	/*******************************************************************************
@@ -272,26 +423,35 @@ public class CustomTableServiceTest {
 	
     @Test
     public void getCoordByKeyFirst() {
-		int[] searchData = tableService.getCoordByKey("d3?");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
+		int[] searchData = tableService.getCoordByKey("asd123");		
 		Assertions.assertEquals(0, searchData[0]);
 		Assertions.assertEquals(0, searchData[1]);
     }
 	
     @Test
     public void getCoordByKeyMiddle() {
-		int[] searchData = tableService.getCoordByKey("%ES");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals(2, searchData[0]);
-		Assertions.assertEquals(3, searchData[1]);
+		int[] searchData = tableService.getCoordByKey("g\"3I@");		
+		Assertions.assertEquals(0, searchData[0]);
+		Assertions.assertEquals(1, searchData[1]);
     }
 	
     @Test
     public void getCoordByKeyLast() {
-		int[] searchData = tableService.getCoordByKey("nFB,/");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
 		
-		Assertions.assertEquals(4, searchData[0]);
-		Assertions.assertEquals(4, searchData[1]);
+		int[] searchData = tableService.getCoordByKey("lq2=");		
+		Assertions.assertEquals(0, searchData[0]);
+		Assertions.assertEquals(2, searchData[1]);
     }
 	
 	
@@ -303,8 +463,13 @@ public class CustomTableServiceTest {
 	
     @Test
     public void saveTableTest() {
-		Assertions.assertThrows(IOException.class, () -> {
-			tableService = new CustomTableServiceImpl("nullTable.txt");
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
+		Assertions.assertDoesNotThrow(() -> {			
+			tableService.saveTable();
+			verify(tableService).saveTable();
 		});
     }
 	
@@ -317,14 +482,22 @@ public class CustomTableServiceTest {
 	
     @Test
     public void changeKeyShouldReturnKeyAlreadyExistException() {
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
 		Assertions.assertThrows(KeyAlreadyExistException.class, () -> {
-			tableService.changeKey("9Ps", "L-b;3");
+			tableService.changeKey("asd123", "d3?");
 		});
     }
 	
     @Test
     public void changeKeyShouldReturnSameData() {
-		String oldKey = "9Ps";
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
+		String oldKey = "UrlF,D";
 		String newKey = "ABC123";
 		String coords, value;
 		List<String> searchData = tableService.getDataByKey(oldKey);
@@ -350,7 +523,12 @@ public class CustomTableServiceTest {
 	
 	@Test
 	public void getRowCountTest() {
-		Assertions.assertEquals(5, tableService.getRowCount());
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
+		Assertions.assertEquals(2, tableService.getRowCount());
 	}
 	
 	
@@ -362,19 +540,27 @@ public class CustomTableServiceTest {
 	
 	@Test
 	public void sortRowTest() {
-		tableService.sortRow(4);
-		Assertions.assertArrayEquals(new int[] {4,0}, tableService.getCoordByKey("&0h{/O"));
-		Assertions.assertArrayEquals(new int[] {4,1}, tableService.getCoordByKey("@iC3&4"));
-		Assertions.assertArrayEquals(new int[] {4,2}, tableService.getCoordByKey("V9|1E"));
-		Assertions.assertArrayEquals(new int[] {4,3}, tableService.getCoordByKey("nFB,/"));
-		Assertions.assertArrayEquals(new int[] {4,4}, tableService.getCoordByKey("z5\\oI"));
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
+		tableService.sortRow(1);
+		Assertions.assertArrayEquals(new int[] {1,0}, tableService.getCoordByKey("UrlF,D"));
+		Assertions.assertArrayEquals(new int[] {1,1}, tableService.getCoordByKey("g\"3I@"));
+		Assertions.assertArrayEquals(new int[] {1,2}, tableService.getCoordByKey("qwe456"));
 		
 	}
 	
 	@Test
 	public void sortRowTestIndexOutOfBounds() {
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
 		Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
-			tableService.sortRow(5);
+			tableService.sortRow(3);
 		});
 	}
 	
@@ -387,10 +573,14 @@ public class CustomTableServiceTest {
 	
 	@Test
 	public void insertRowTest() {
-		tableService.insertRow(0,6);
-		Assertions.assertEquals(6, tableService.getRowCount());
-		Assertions.assertNotEquals(null, tableService.getDataByCoord(0,5));
-		Assertions.assertEquals(null, tableService.getDataByCoord(0,6));
+		tableCoords.add(new ArrayList<String>(Arrays.asList("asd123","d3?","lq2=")));
+		tableCoords.add(new ArrayList<String>(Arrays.asList("UrlF,D","g\"3I@","qwe456")));
+		CustomTable sampleTable = new CustomTable(keyValue, tableCoords);
+		tableService.setDataTable(sampleTable);
+		
+		tableService.insertRow(0,3);
+		Assertions.assertEquals(3, tableService.getRowCount());
+		Assertions.assertNotEquals(null, tableService.getDataByCoord(0,2));
+		Assertions.assertEquals(null, tableService.getDataByCoord(0,4));
 	}
-	
 }

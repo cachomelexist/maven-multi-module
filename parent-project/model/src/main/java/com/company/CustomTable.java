@@ -11,11 +11,10 @@ public class CustomTable {
 	private String fileName;
 	
 	public CustomTable(Map<String, String> keyValue, List<ArrayList<String>> tableCoords) {
-		this.keyValue = keyValue;
-		this.tableCoords = tableCoords;
+		createTable(keyValue, tableCoords);
 	}
 	
-	public void setTable(Map<String, String> keyValue, List<ArrayList<String>> tableCoords) {
+	public void createTable(Map<String, String> keyValue, List<ArrayList<String>> tableCoords) {
 		this.keyValue = keyValue;
 		this.tableCoords = tableCoords;
 	}
@@ -34,9 +33,5 @@ public class CustomTable {
 	
 	public void updateCoord(Integer row, Integer col, String key) {
 		tableCoords.get(row).set(col, key);
-	}
-	
-	public Integer getRowCount() {
-		return tableCoords.size();
 	}
 }

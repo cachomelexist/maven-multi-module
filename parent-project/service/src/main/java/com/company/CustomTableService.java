@@ -6,6 +6,12 @@ import java.io.IOException;
 
 public interface CustomTableService {	
 	public void createTable() throws IOException;
+	public void createTable(Integer rows, Integer cols) throws IllegalArgumentException;
+	public void createTable(String fileName) throws IOException;
+	
+	public void setDataTable(CustomTable dataTable);
+	
+	public void validateDimension(Integer dim) throws IllegalArgumentException;
 	
 	public void printTable();
 	
@@ -39,9 +45,9 @@ public interface CustomTableService {
 	
 	public void saveTable() throws IOException;
 	
-	public Integer getRowCount();
-	
 	public void sortRow(Integer row);
 	
 	public void insertRow(Integer row, Integer colCount);
+	
+	public Integer getRowCount();
 }

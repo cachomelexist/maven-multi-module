@@ -23,28 +23,8 @@ public class CustomTableServiceImpl implements CustomTableService {
 	private String fileName = "defaultTable.txt";
 	private Random rand = new Random();
 	
-	public CustomTableServiceImpl() throws IOException {
-		createTable();
-		saveTable();
-	}
-	
-	public CustomTableServiceImpl(Integer rowCount, Integer colCount) throws IOException {
-		validateDimension(rowCount);
-		validateDimension(colCount);
-		createTable(rowCount, colCount);
-		saveTable();
-	}
-	
-	public CustomTableServiceImpl(String fileName) throws IOException {
-		createTable(fileName);
-		saveTable();
-	}
-	
-	public void validateDimension(Integer dim) throws IllegalArgumentException {
-		if(dim <= 0) throw new IllegalArgumentException("Must not be Less than one (1)");
-	}
-	
 	// set defaultTable.txt as a READ ONLY default table inside the jar file
+	@Override
 	public void createTable() throws IOException {
 		InputStream in = getClass().getResourceAsStream("/"+fileName); 
 		Map<String, String> keyValueMap = new HashMap<String, String>();
@@ -70,7 +50,10 @@ public class CustomTableServiceImpl implements CustomTableService {
 		//System.out.println(coordList);
 	}
 	
-	public void createTable(Integer rows, Integer cols) throws IOException {
+	@Override
+	public void createTable(Integer rows, Integer cols) throws IllegalArgumentException {
+		validateDimension(rows);
+		validateDimension(cols);
 		Map<String, String> keyValueMap = new HashMap<String, String>();
 		List<ArrayList<String>> coordList = new ArrayList<ArrayList<String>>();
 		
@@ -100,6 +83,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		dataTable = new CustomTable(keyValueMap, coordList);
 	}
 
+	@Override
 	public void createTable(String fileName) throws IOException {
 		Map<String, String> keyValueMap = new HashMap<String, String>();
 		List<ArrayList<String>> coordList = new ArrayList<ArrayList<String>>();
@@ -124,6 +108,17 @@ public class CustomTableServiceImpl implements CustomTableService {
 		//System.out.println(coordList);
 	}
 	
+	@Override
+	public void setDataTable(CustomTable dataTable) {
+		this.dataTable = dataTable;
+	}
+	
+	@Override
+	public void validateDimension(Integer dim) throws IllegalArgumentException {
+		if(dim <= 0) throw new IllegalArgumentException("Must not be Less than one (1)");
+	}
+	
+	@Override
 	public void printTable() {
 		int row = 0;
 		for(ArrayList<String> rowArr: dataTable.getCoords()) {
@@ -136,19 +131,17 @@ public class CustomTableServiceImpl implements CustomTableService {
 		}
 	}
 	
-	// searchKeyInstance(String key) - search for matching instances in each key
-	// output: [[key], [instances]]
+	@Override
 	public List<ArrayList<String>> searchKeyInstances(String key) {
 		return searchInstances(key, true);
 	}
 	
+	@Override
 	public List<ArrayList<String>> searchValueInstances(String value) {
 		return searchInstances(value, false);
 	}
 	
-	// searchKeyInstance(String key) - search for matching instances in each key
-	// output: [[key], [instances]]
-	//keymode - true:search in keys, false:search in values
+	@Override
 	public List<ArrayList<String>> searchInstances(String searchData, Boolean keyMode) {
 		List<ArrayList<String>> matchingContents = new ArrayList<ArrayList<String>>();
 		
@@ -183,8 +176,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		return matchingContents;
 	}
 	
-	// getDataByKey(String key) - get data using FULL SPECIFIC KEYs
-	// output: [(row, col), key, value]
+	@Override
 	public List<String> getDataByKey(String key) {
 		List<String> data = new ArrayList<>();
 		
@@ -199,6 +191,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		return data;
 	}
 	
+	@Override
 	public List<String> getDataByCoord(int row, int col) {
 		List<String> data = new ArrayList<>();
 		try {
@@ -211,8 +204,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		} catch (Exception e) {return null;}
 	}
 	
-	// getCoordByKey(String key) - get the (row, col) coordinates using the FULL SPECIFIC KEY
-	// output: [row, col]
+	@Override
 	public int[] getCoordByKey(String key) {
 		int length = dataTable.getCoords().size();
 		int col = 0, row;
@@ -223,6 +215,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		return new int[]{row, col};
 	}
 	
+	@Override
 	public void changeKey(String oldKey, String newKey) throws KeyAlreadyExistException {
 		// check no duplicate key
 		if(dataTable.getMap().containsKey(newKey)) {
@@ -233,10 +226,12 @@ public class CustomTableServiceImpl implements CustomTableService {
 		dataTable.updateCoord(coord[0], coord[1], newKey);
 	}
 	
+	@Override
 	public void changeValueByKey(String key, String value){
 		dataTable.getMap().replace(key, value);
 	}
 	
+	@Override
 	public void saveTable() throws IOException {
 		List<String> data = new ArrayList<>();
 		String line;
@@ -250,10 +245,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		FileUtils.writeLines(new File(fileName), data);
 	}
 	
-	public Integer getRowCount() {
-		return dataTable.getRowCount();
-	}
-	
+	@Override
 	public void sortRow(Integer row) {
 		List<Integer> keyLen = new ArrayList<>();
 		List<String> unsorted = new ArrayList<>();
@@ -279,6 +271,7 @@ public class CustomTableServiceImpl implements CustomTableService {
 		System.out.println("Sorted Keys: "+dataTable.getCoords().get(row));
 	}
 	
+	@Override
 	public void insertRow(Integer row, Integer colCount) {
 		Random rand = new Random();
 		dataTable.getCoords().add(row, new ArrayList<String>());
@@ -301,5 +294,10 @@ public class CustomTableServiceImpl implements CustomTableService {
 			dataTable.getMap().put(key, value);
 			dataTable.getCoords().get(row).add(key);
 		}
+	}
+	
+	@Override
+	public Integer getRowCount() {
+		return dataTable.getCoords().size();
 	}
 }
