@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.company.CustomTableServiceTest" time="3.896" tests="38" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.company.CustomTableServiceTest" time="3.829" tests="46" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\test-classes;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\classes;C:\Users\Ernest\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\Ernest\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ernest\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\Ernest\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ernest\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy\1.14.6\byte-buddy-1.14.6.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar;C:\Users\Ernest\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\util\target\classes;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\model\target\classes;C:\Users\Ernest\.m2\repository\commons-io\commons-io\2.13.0\commons-io-2.13.0.jar;"/>
+    <property name="java.class.path" value="C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\test-classes;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\classes;C:\Users\Ernest\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\Ernest\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ernest\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\Ernest\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ernest\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy\1.14.6\byte-buddy-1.14.6.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar;C:\Users\Ernest\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\util\target\util-1.0-SNAPSHOT.jar;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\model\target\model-1.0-SNAPSHOT.jar;C:\Users\Ernest\.m2\repository\commons-io\commons-io\2.13.0\commons-io-2.13.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-20\bin"/>
-    <property name="sun.java.command" value="C:\Users\Ernest\AppData\Local\Temp\surefire4225532493524719522\surefirebooter-20230925105351661_3.jar C:\Users\Ernest\AppData\Local\Temp\surefire4225532493524719522 2023-09-25T10-53-50_035-jvmRun1 surefire-20230925105351661_1tmp surefire_0-20230925105351661_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Ernest\AppData\Local\Temp\surefire15564607584336600903\surefirebooter-20230927104832684_3.jar C:\Users\Ernest\AppData\Local\Temp\surefire15564607584336600903 2023-09-27T10-48-29_071-jvmRun1 surefire-20230927104832684_1tmp surefire_0-20230927104832684_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\test-classes;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\classes;C:\Users\Ernest\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\Ernest\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ernest\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\Ernest\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ernest\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy\1.14.6\byte-buddy-1.14.6.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar;C:\Users\Ernest\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\util\target\classes;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\model\target\classes;C:\Users\Ernest\.m2\repository\commons-io\commons-io\2.13.0\commons-io-2.13.0.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\test-classes;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\service\target\classes;C:\Users\Ernest\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\Ernest\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ernest\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\Ernest\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ernest\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy\1.14.6\byte-buddy-1.14.6.jar;C:\Users\Ernest\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar;C:\Users\Ernest\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\util\target\util-1.0-SNAPSHOT.jar;C:\Users\Ernest\Desktop\Maven\Git_Repo\parent-project\model\target\model-1.0-SNAPSHOT.jar;C:\Users\Ernest\.m2\repository\commons-io\commons-io\2.13.0\commons-io-2.13.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Ernest"/>
     <property name="user.language" value="en"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Ernest\AppData\Local\Temp\surefire4225532493524719522\surefirebooter-20230925105351661_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Ernest\AppData\Local\Temp\surefire15564607584336600903\surefirebooter-20230927104832684_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20.0.2+9-78"/>
@@ -58,49 +58,57 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="searchKeyInstancesMultiCharStart" classname="com.company.CustomTableServiceTest" time="3.19"/>
-  <testcase name="searchValueInstancesMultiCharStart" classname="com.company.CustomTableServiceTest" time="0.009"/>
-  <testcase name="searchKeyInstancesMultiCharMiddle" classname="com.company.CustomTableServiceTest" time="0.011"/>
-  <testcase name="searchValueInstancesMultiCharMiddle" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="searchKeyInstancesMultiCharStart" classname="com.company.CustomTableServiceTest" time="3.137"/>
+  <testcase name="searchValueInstancesMultiCharStart" classname="com.company.CustomTableServiceTest" time="0.011"/>
+  <testcase name="searchKeyInstancesMultiCharMiddle" classname="com.company.CustomTableServiceTest" time="0.014"/>
+  <testcase name="searchValueInstancesMultiCharMiddle" classname="com.company.CustomTableServiceTest" time="0.01"/>
   <testcase name="searchKeyInstancesSingleCharMiddle" classname="com.company.CustomTableServiceTest" time="0.012"/>
-  <testcase name="searchValueInstancesSingleCharEnd" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="sortRowTest" classname="com.company.CustomTableServiceTest" time="0.017">
+  <testcase name="searchValueInstancesSingleCharEnd" classname="com.company.CustomTableServiceTest" time="0.01"/>
+  <testcase name="sortRowTest" classname="com.company.CustomTableServiceTest" time="0.056">
     <system-out><![CDATA[
 Keys: [UrlF,D, g"3I@, qwe456]
-Unsorted Key+Value: [UrlF,D+TWCRe, g"3I@h>Vxv, qwe456654ewq]
-Sorted Key+Value: [UrlF,D+TWCRe, g"3I@h>Vxv, qwe456654ewq]
-Sorted Keys: [UrlF,D, g"3I@, qwe456]
 ]]></system-out>
   </testcase>
-  <testcase name="getDataByKeyFirst" classname="com.company.CustomTableServiceTest" time="0.015"/>
-  <testcase name="changeKeyShouldReturnSameData" classname="com.company.CustomTableServiceTest" time="0.019"/>
-  <testcase name="getRowCountTest" classname="com.company.CustomTableServiceTest" time="0.001"/>
-  <testcase name="searchKeyInstancesShouldReturnZero" classname="com.company.CustomTableServiceTest" time="0.003"/>
-  <testcase name="getCoordByKeyFirst" classname="com.company.CustomTableServiceTest" time="0.015"/>
-  <testcase name="searchValueInstancesTwoCharMiddle" classname="com.company.CustomTableServiceTest" time="0.005"/>
-  <testcase name="sortRowTestIndexOutOfBounds" classname="com.company.CustomTableServiceTest" time="0.045"/>
+  <testcase name="getDataByKeyFirst" classname="com.company.CustomTableServiceTest" time="0.008"/>
+  <testcase name="createTableFromInputIllegalArgumentException" classname="com.company.CustomTableServiceTest" time="0.038"/>
+  <testcase name="changeKeyShouldReturnSameData" classname="com.company.CustomTableServiceTest" time="0.012"/>
+  <testcase name="createTableFromFileIOException" classname="com.company.CustomTableServiceTest" time="0.008"/>
+  <testcase name="getRowCountTest" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="searchKeyInstancesShouldReturnZero" classname="com.company.CustomTableServiceTest" time="0.008"/>
+  <testcase name="getCoordByKeyFirst" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="searchValueInstancesTwoCharMiddle" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="sortRowTestIndexOutOfBounds" classname="com.company.CustomTableServiceTest" time="0.007"/>
   <testcase name="getCoordByKeyMiddle" classname="com.company.CustomTableServiceTest" time="0.006"/>
-  <testcase name="searchKeyInstancesSingleCharEnd" classname="com.company.CustomTableServiceTest" time="0.005"/>
-  <testcase name="searchKeyInstancesSingleCharStart" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="searchValueInstancesSingleCharStart" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="searchKeyInstancesSingleCharMultiKeys" classname="com.company.CustomTableServiceTest" time="0.019"/>
-  <testcase name="searchValueInstancesSingleCharMultiKeys" classname="com.company.CustomTableServiceTest" time="0.008"/>
+  <testcase name="searchKeyInstancesSingleCharEnd" classname="com.company.CustomTableServiceTest" time="0.007"/>
+  <testcase name="searchKeyInstancesSingleCharStart" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="searchValueInstancesSingleCharStart" classname="com.company.CustomTableServiceTest" time="0.005"/>
+  <testcase name="searchKeyInstancesSingleCharMultiKeys" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="changeValueByKeyTest" classname="com.company.CustomTableServiceTest" time="0.008"/>
+  <testcase name="searchValueInstancesSingleCharMultiKeys" classname="com.company.CustomTableServiceTest" time="0.004"/>
   <testcase name="searchValueInstancesTwoCharEnd" classname="com.company.CustomTableServiceTest" time="0.007"/>
-  <testcase name="getDataByCoordLast" classname="com.company.CustomTableServiceTest" time="0.015"/>
-  <testcase name="searchKeyInstancesTwoCharMiddle" classname="com.company.CustomTableServiceTest" time="0.009"/>
-  <testcase name="searchKeyInstancesTwoCharStart" classname="com.company.CustomTableServiceTest" time="0.011"/>
+  <testcase name="getDataByCoordLast" classname="com.company.CustomTableServiceTest" time="0.007"/>
+  <testcase name="searchKeyInstancesFullKey" classname="com.company.CustomTableServiceTest" time="0.005"/>
+  <testcase name="searchKeyInstancesTwoCharMiddle" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="searchKeyInstancesTwoCharStart" classname="com.company.CustomTableServiceTest" time="0.006"/>
+  <testcase name="createTableFromInput" classname="com.company.CustomTableServiceTest" time="0.005"/>
   <testcase name="searchValueInstancesTwoCharStart" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="searchValueInstancesSingleCharMiddle" classname="com.company.CustomTableServiceTest" time="0.006"/>
-  <testcase name="saveTableTest" classname="com.company.CustomTableServiceTest" time="0.152"/>
-  <testcase name="insertRowTest" classname="com.company.CustomTableServiceTest" time="0.01"/>
+  <testcase name="searchValueInstancesSingleCharMiddle" classname="com.company.CustomTableServiceTest" time="0.012"/>
+  <testcase name="saveTableTest" classname="com.company.CustomTableServiceTest" time="0.08"/>
+  <testcase name="searchValueInstancesFullValue" classname="com.company.CustomTableServiceTest" time="0.007"/>
+  <testcase name="insertRowTest" classname="com.company.CustomTableServiceTest" time="0.011"/>
   <testcase name="changeKeyShouldReturnKeyAlreadyExistException" classname="com.company.CustomTableServiceTest" time="0.007"/>
-  <testcase name="getCoordByKeyLast" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="searchKeyInstancesTwoCharEnd" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="searchKeyInstancesMultiCharEnd" classname="com.company.CustomTableServiceTest" time="0.006"/>
-  <testcase name="searchValueInstancesMultiCharEnd" classname="com.company.CustomTableServiceTest" time="0.007"/>
-  <testcase name="getDataByCoordMiddle" classname="com.company.CustomTableServiceTest" time="0.003"/>
+  <testcase name="getCoordByKeyLast" classname="com.company.CustomTableServiceTest" time="0.005"/>
+  <testcase name="createDefaultTable" classname="com.company.CustomTableServiceTest" time="0.008"/>
+  <testcase name="searchKeyInstancesTwoCharEnd" classname="com.company.CustomTableServiceTest" time="0.005"/>
+  <testcase name="searchKeyInstancesMultiCharEnd" classname="com.company.CustomTableServiceTest" time="0.007"/>
+  <testcase name="searchValueInstancesMultiCharEnd" classname="com.company.CustomTableServiceTest" time="0.018"/>
+  <testcase name="getDataByCoordMiddle" classname="com.company.CustomTableServiceTest" time="0.007"/>
   <testcase name="getDataByKeyLast" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="getDataByKeyMiddle" classname="com.company.CustomTableServiceTest" time="0.004"/>
-  <testcase name="getDataByCoordFirst" classname="com.company.CustomTableServiceTest" time="0.005"/>
-  <testcase name="searchValueInstancesNoMatch" classname="com.company.CustomTableServiceTest" time="0.003"/>
+  <testcase name="getDataByKeyMiddle" classname="com.company.CustomTableServiceTest" time="0.005"/>
+  <testcase name="getDataByCoordFirst" classname="com.company.CustomTableServiceTest" time="0.004"/>
+  <testcase name="searchValueInstancesNoMatch" classname="com.company.CustomTableServiceTest" time="0.004"/>
+  <testcase name="printTableRunTest" classname="com.company.CustomTableServiceTest" time="0.007">
+    <system-out><![CDATA[0 [ UrlF,D , +TWCRe ] [ g"3I@ , h>Vxv ] [ qwe456 , 654ewq ] 
+]]></system-out>
+  </testcase>
 </testsuite>

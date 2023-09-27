@@ -258,17 +258,12 @@ public class CustomTableServiceImpl implements CustomTableService {
 			sorted.add(key + dataTable.getMap().get(key));
 		}
 		
-		System.out.println("Unsorted Key+Value: "+unsorted);
-		System.out.println("Sorted Key+Value: "+sorted);
-		
 		Integer col = 0;
 		Iterator<String> i = sorted.iterator();
         while (i.hasNext()) {
 			String merged = i.next();
 			dataTable.getCoords().get(row).set(col++, merged.substring(0,keyLen.get(unsorted.indexOf(merged))));
 		}
-		
-		System.out.println("Sorted Keys: "+dataTable.getCoords().get(row));
 	}
 	
 	@Override

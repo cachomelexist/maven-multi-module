@@ -10,6 +10,8 @@ public class CustomTable {
 	private List<ArrayList<String>> tableCoords = new ArrayList<ArrayList<String>>();
 	private String fileName;
 	
+	public CustomTable() {}
+	
 	public CustomTable(Map<String, String> keyValue, List<ArrayList<String>> tableCoords) {
 		createTable(keyValue, tableCoords);
 	}
